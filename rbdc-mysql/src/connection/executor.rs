@@ -173,7 +173,9 @@ impl MySqlConnection {
                 loop {
                     let packet = self.stream.recv_packet().await?;
 
-                    if packet[0] == 0xfe && packet.len() < 9 {
+                    //if packet[0] == 0xfe && packet.len() < 9 
+                    if packet[0] == 0xfe
+                    {
                         let eof = packet.eof(self.stream.capabilities)?;
 
                         r#yield!(Either::Left(MySqlQueryResult {
